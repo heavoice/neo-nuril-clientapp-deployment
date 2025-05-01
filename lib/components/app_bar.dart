@@ -36,7 +36,9 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
               ),
               ResponsiveBuilder(builder: (context, sizingInformation) {
                 if (sizingInformation.deviceScreenType !=
-                    DeviceScreenType.mobile) {
+                        DeviceScreenType.mobile &&
+                    sizingInformation.deviceScreenType !=
+                        DeviceScreenType.tablet) {
                   return Row(
                     children: [
                       _buildNavItem('About'),
@@ -46,24 +48,31 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
                     ],
                   );
                 }
+
                 return const SizedBox.shrink();
               }),
               Row(
                 children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.secondaryColor,
-                        foregroundColor: AppColors.bgColor),
-                    onPressed: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
-                      child: Text(
-                        'Sign in',
-                        style: GoogleFonts.montserrat(
-                            fontSize: 12, fontWeight: FontWeight.w400),
+                  ScreenTypeLayout.builder(
+                    desktop: (BuildContext context) => ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.secondaryColor,
+                          foregroundColor: AppColors.bgColor),
+                      onPressed: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 12),
+                        child: Text(
+                          'Sign in',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
                     ),
+                    mobile: (BuildContext context) => const SizedBox.shrink(),
+                    tablet: (BuildContext context) => const SizedBox.shrink(),
                   ),
                   const SizedBox(
                     width: 16,
