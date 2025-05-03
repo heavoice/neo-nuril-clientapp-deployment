@@ -14,26 +14,24 @@ class Product extends StatefulWidget {
 
 class _ProductState extends State<Product> {
   final PageController _pageController = PageController(viewportFraction: 0.85);
-  int _currentPage = 0;
+  int getItemsPerPage(double width) {
+    if (width > 1270) return 3;
+    if (width > 734) return 2;
+    return 1;
+  }
 
   void _goToPrevious() {
-    if (_currentPage > 0) {
-      _pageController.previousPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
-      setState(() => _currentPage--);
-    }
+    _pageController.previousPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
   }
 
   void _goToNext() {
-    if (_currentPage < products.length - 1) {
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.ease,
-      );
-      setState(() => _currentPage++);
-    }
+    _pageController.nextPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
   }
 
   final List<Widget> products = [
@@ -341,7 +339,7 @@ class _ProductState extends State<Product> {
         ),
       ),
       mobile: (BuildContext context) => Container(
-        margin: const EdgeInsets.symmetric(vertical: 60, horizontal: 24),
+        margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
         constraints: const BoxConstraints(maxWidth: 600),
         child: Column(
           children: [
@@ -411,7 +409,7 @@ class _ProductState extends State<Product> {
                   // Carousel
                   Expanded(
                     child: SizedBox(
-                      height: 515,
+                      height: 492,
                       child: PageView.builder(
                         controller: _pageController,
                         itemCount: (products.length /

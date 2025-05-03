@@ -91,7 +91,11 @@ class _ProductCardState extends State<ProductCard> {
             Image.asset(
               widget.imagePath,
               width: screenWidth <= 734 ? 150 : null,
-              height: screenWidth <= 734 ? 150 : null,
+              height: screenWidth <= 600
+                  ? 130
+                  : screenWidth <= 734
+                      ? 150
+                      : null,
             ),
             const SizedBox(height: 20),
             Text(
@@ -134,7 +138,7 @@ class _ProductCardState extends State<ProductCard> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenWidth >= 600 ? 10 : 20),
             Container(
               width: 200,
               decoration: const BoxDecoration(
@@ -163,7 +167,7 @@ class _ProductCardState extends State<ProductCard> {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: screenWidth >= 600 ? 10 : 20),
             Container(
               width: screenWidth >= 600 ? 200 : 100,
               decoration: const BoxDecoration(

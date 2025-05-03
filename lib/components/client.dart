@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/data/client_data.dart';
 import 'package:frontend/settings/constant.dart';
+import 'package:frontend/widgets/client_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:solar_icons/solar_icons.dart';
@@ -12,8 +14,16 @@ class Client extends StatefulWidget {
 }
 
 class _ClientState extends State<Client> {
+  int startIndex = 0;
+  late int itemsPerPage;
+
+  List<Map<String, String>> getPaginatedData() {
+    return client.skip(startIndex).take(itemsPerPage).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    itemsPerPage = MediaQuery.of(context).size.width >= 1128 ? 2 : 1;
     return ScreenTypeLayout.builder(
       desktop: (BuildContext context) => Center(
         child: Container(
@@ -70,137 +80,145 @@ class _ClientState extends State<Client> {
                 margin: const EdgeInsets.symmetric(vertical: 24),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        width: 500,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 10,
-                              spreadRadius: 2,
-                              offset: Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                ClipOval(
-                                  child: Image.asset(
-                                    'assets/img/winter.jpeg',
-                                    width: 50,
-                                    height: 50,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Adam Smith',
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 6),
-                                    Text(
-                                      'Neo Nuril Software Engineer',
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                              style: GoogleFonts.montserrat(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        )),
-                    const SizedBox(
-                      width: 32,
-                    ),
-                    Container(
-                        width: 500,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 10,
-                              spreadRadius: 2,
-                              offset: Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                ClipOval(
-                                  child: Image.asset(
-                                    'assets/img/winter.jpeg',
-                                    width: 50,
-                                    height: 50,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Adam Smith',
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 6),
-                                    Text(
-                                      'Neo Nuril Software Engineer',
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                              style: GoogleFonts.montserrat(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        )),
-                  ],
+                  children: getPaginatedData()
+                      .map((testimonial) => Padding(
+                            padding: const EdgeInsets.only(right: 32),
+                            child: clientCard(testimonial, context),
+                          ))
+                      .toList(),
                 ),
-              )
+              ),
+              Center(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  (client.length / itemsPerPage).ceil(),
+                  (index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Container(
+                        width: (startIndex == index * itemsPerPage) ? 30 : 15,
+                        height: 10,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          color: AppColors.thirdColor,
+                        ),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.thirdColor,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              startIndex = index * itemsPerPage;
+                            });
+                          },
+                          child: null,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )),
             ],
           ),
+        ),
+      ),
+      mobile: (BuildContext context) => Container(
+        constraints: const BoxConstraints(maxWidth: 600),
+        margin: const EdgeInsets.symmetric(vertical: 60, horizontal: 24),
+        child: Column(
+          children: [
+            Column(
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Here are some of the exceptional products we proudly offer.',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                InkWell(
+                  onTap: () {},
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  hoverColor: const Color.fromRGBO(0, 0, 0, 0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        Text(
+                          'All products',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.fourthColor,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        const Icon(
+                          SolarIconsOutline.altArrowRight,
+                          size: 12,
+                          color: AppColors.fourthColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  margin: const EdgeInsets.symmetric(vertical: 24),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: getPaginatedData()
+                        .map((testimonial) => Padding(
+                              padding: const EdgeInsets.only(right: 32),
+                              child: clientCard(testimonial, context),
+                            ))
+                        .toList(),
+                  ),
+                ),
+                Center(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    (client.length / itemsPerPage).ceil(),
+                    (index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Container(
+                          width: (startIndex == index * itemsPerPage) ? 30 : 15,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                            color: AppColors.thirdColor,
+                          ),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.thirdColor,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                startIndex = index * itemsPerPage;
+                              });
+                            },
+                            child: null,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                )),
+              ],
+            ),
+          ],
         ),
       ),
     );
