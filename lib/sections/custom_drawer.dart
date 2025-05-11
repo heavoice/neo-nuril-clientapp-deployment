@@ -12,6 +12,7 @@ class CustomDrawer extends StatelessWidget {
     return Container(
       width: 200,
       color: Colors.white,
+      padding: const EdgeInsets.symmetric(vertical: 24),
       child: Column(
         children: <Widget>[
           Container(
@@ -46,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
                 backgroundColor: AppColors.secondaryColor,
                 foregroundColor: AppColors.bgColor),
             onPressed: () {},
-            child: Padding(
+            child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Text(
                 'Sign in',
@@ -68,8 +69,8 @@ class CustomDrawer extends StatelessWidget {
       title: Text(
         title,
         style: GoogleFonts.montserrat(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
           color: AppColors.primaryColor,
         ),
       ),
