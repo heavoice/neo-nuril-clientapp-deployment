@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/widgets/product_list.dart';
+import 'package:neo_nuril_app/widgets/product_list.dart';
 
 final List<Widget> products = [
   const ProductCard(

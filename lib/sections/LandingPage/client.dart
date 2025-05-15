@@ -7,7 +7,8 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:solar_icons/solar_icons.dart';
 
 class Client extends StatefulWidget {
-  const Client({super.key});
+  Client({super.key});
+  final clientKey = GlobalKey();
 
   @override
   State<Client> createState() => _ClientState();

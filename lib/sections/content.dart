@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/settings/constant.dart';
+import 'package:neo_nuril_app/settings/constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:responsive_builder/responsive_builder.dart';

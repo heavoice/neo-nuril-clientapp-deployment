@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/settings/constant.dart';
+import 'package:neo_nuril_app/settings/constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:solar_icons/solar_icons.dart';
 
@@ -42,13 +42,13 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    double badgeSize = screenWidth >= 600 ? 40 : 20;
+    double badgeSize = screenWidth >= 734 ? 40 : 20;
     double badgeMarginRight = screenWidth > 1210
         ? 80
-        : screenWidth >= 600
+        : screenWidth >= 734
             ? 40
             : 20;
-    double badgeFontSize = screenWidth >= 600 ? 12 : 6;
+    double badgeFontSize = screenWidth >= 734 ? 12 : 6;
 
     return Container(
       decoration: BoxDecoration(
@@ -92,7 +92,7 @@ class _ProductCardState extends State<ProductCard> {
             Image.asset(
               widget.imagePath,
               width: screenWidth <= 734 ? 150 : null,
-              height: screenWidth <= 600
+              height: screenWidth <= 734
                   ? 130
                   : screenWidth <= 734
                       ? 150
@@ -103,7 +103,7 @@ class _ProductCardState extends State<ProductCard> {
               widget.title,
               style: GoogleFonts.montserrat(
                 color: AppColors.primaryColor,
-                fontSize: screenWidth >= 600 ? 18 : 11,
+                fontSize: screenWidth >= 734 ? 18 : 11,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -139,9 +139,9 @@ class _ProductCardState extends State<ProductCard> {
                 ),
               ],
             ),
-            SizedBox(height: screenWidth >= 600 ? 10 : 20),
+            SizedBox(height: screenWidth >= 734 ? 10 : 20),
             Container(
-              width: screenWidth > 600 ? 200 : null,
+              width: screenWidth > 734 ? 200 : null,
               padding: const EdgeInsets.symmetric(horizontal: 8),
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -169,9 +169,9 @@ class _ProductCardState extends State<ProductCard> {
                 ],
               ),
             ),
-            SizedBox(height: screenWidth >= 600 ? 10 : 20),
+            SizedBox(height: screenWidth >= 734 ? 10 : 20),
             Container(
-              width: screenWidth >= 600 ? 200 : 100,
+              width: screenWidth >= 734 ? 200 : 100,
               decoration: const BoxDecoration(
                 color: AppColors.thirdColor,
                 borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -185,7 +185,7 @@ class _ProductCardState extends State<ProductCard> {
                   'Add to cart',
                   style: GoogleFonts.montserrat(
                     color: Colors.white,
-                    fontSize: screenWidth >= 600 ? null : 12,
+                    fontSize: screenWidth >= 734 ? null : 12,
                   ),
                 ),
               ),
