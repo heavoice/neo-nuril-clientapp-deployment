@@ -84,7 +84,9 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   const SizedBox(width: 16),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/cart');
+                    },
                     icon: const Icon(SolarIconsOutline.bag4),
                     color: AppColors.primaryColor,
                   ),

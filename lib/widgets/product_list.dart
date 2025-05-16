@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:neo_nuril_app/settings/constant.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:solar_icons/solar_icons.dart';
+import 'package:neo_nuril_app/providers/cart_provider.dart';
+import 'package:neo_nuril_app/models/cart_item.dart';
 
 class ProductCard extends StatefulWidget {
   final String imagePath;
@@ -178,8 +181,22 @@ class _ProductCardState extends State<ProductCard> {
               ),
               child: TextButton(
                 onPressed: () {
-                  // Fungsi Add to Cart (bisa dikembangkan)
-                  debugPrint('Added $quantity ${widget.title} to cart');
+                  final cartItem = CartItem(
+                    title: widget.title,
+                    imagePath: widget.imagePath,
+                    quantity: quantity,
+                    price: widget.newPrice,
+                  );
+
+                  Provider.of<CartProvider>(context, listen: false)
+                      .addToCart(cartItem);
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('${widget.title} added to cart'),
+                      duration: const Duration(seconds: 1),
+                    ),
+                  );
                 },
                 child: Text(
                   'Add to cart',

@@ -10,10 +10,10 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      width: 200,
+      width: screenWidth >= 600 ? 400 : 200,
       color: Colors.white,
-      padding: const EdgeInsets.symmetric(vertical: 24),
       child: Column(
         children: <Widget>[
           Container(
@@ -59,6 +59,9 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(
+            height: 24,
+          )
         ],
       ),
     );
