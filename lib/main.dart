@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:neo_nuril_app/pages/cart_page.dart';
-import './pages/home_page.dart';
-import './providers/cart_provider.dart';
+import 'package:neo_nuril_app/pages/home_page.dart';
+import 'package:neo_nuril_app/providers/cart_provider.dart';
+import 'package:neo_nuril_app/providers/checkbox_provider.dart';
 
 void main() {
   runApp(const NeoNuril());
@@ -13,8 +14,11 @@ class NeoNuril extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CartProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => CheckboxProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Neo Nuril App',

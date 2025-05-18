@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_web_libraries_in_flutter
+
 import 'package:flutter/material.dart';
 import 'package:neo_nuril_app/sections/LandingPage/product.dart';
 import 'dart:html' as html;

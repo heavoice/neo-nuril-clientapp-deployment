@@ -22,12 +22,18 @@ class CartDrawer extends StatelessWidget {
                 bottom: BorderSide(color: AppColors.primaryColor, width: 1),
               ),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image(
-                  image: Svg('assets/img/neo-nuril.svg'),
-                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
+                  child: const Image(
+                      image: Svg(
+                    'assets/img/neo-nuril.svg',
+                  )),
+                )
               ],
             ),
           ),

@@ -92,24 +92,4 @@ class CartAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  Widget _buildNavItem(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 20),
-      child: InkWell(
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        hoverColor: const Color.fromRGBO(0, 0, 0, 0),
-        onTap: () {},
-        child: Text(
-          text,
-          style: GoogleFonts.montserrat(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: AppColors.primaryColor,
-          ),
-        ),
-      ),
-    );
-  }
 }

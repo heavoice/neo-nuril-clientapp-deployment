@@ -1,9 +1,12 @@
+// ignore_for_file: avoid_web_libraries_in_flutter
+
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
 import 'package:neo_nuril_app/sections/Cart/cart_appbar.dart';
 import 'package:neo_nuril_app/sections/Cart/cart_drawer.dart';
 import 'package:neo_nuril_app/sections/Cart/cart_list.dart';
 import 'package:neo_nuril_app/sections/Cart/head_cart.dart';
+import 'package:neo_nuril_app/widgets/checkout_navigation.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -21,6 +24,7 @@ class CartPage extends StatelessWidget {
           children: [HeadCart(), CartList()],
         ),
       ),
+      bottomNavigationBar: const CheckoutNavigation(),
     );
   }
 }

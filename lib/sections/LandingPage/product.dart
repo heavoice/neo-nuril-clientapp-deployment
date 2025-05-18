@@ -14,7 +14,7 @@ class Product extends StatefulWidget {
 }
 
 class _ProductState extends State<Product> {
-  final PageController _pageController = PageController(viewportFraction: 0.85);
+  final PageController _pageController = PageController(viewportFraction: 1);
 
   void _goToPrevious() {
     _pageController.previousPage(
@@ -32,6 +32,7 @@ class _ProductState extends State<Product> {
 
   Widget _buildContent(BuildContext context, SizingInformation sizingInfo) {
     double width = sizingInfo.screenSize.width;
+    final screenWidth = MediaQuery.of(context).size.width;
     int itemsPerPage = width > 1270
         ? 3
         : width > 734
@@ -51,7 +52,7 @@ class _ProductState extends State<Product> {
     return Container(
       margin:
           EdgeInsets.symmetric(vertical: width > 734 ? 60 : 24, horizontal: 24),
-      constraints: const BoxConstraints(maxWidth: 1400),
+      constraints: BoxConstraints(maxWidth: screenWidth < 1000 ? 600 : 1400),
       child: Column(
         children: [
           Container(

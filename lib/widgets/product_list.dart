@@ -7,14 +7,16 @@ import 'package:neo_nuril_app/providers/cart_provider.dart';
 import 'package:neo_nuril_app/models/cart_item.dart';
 
 class ProductCard extends StatefulWidget {
+  final String id;
   final String imagePath;
   final String title;
   final String weight;
-  final String oldPrice;
-  final String newPrice;
+  final double oldPrice;
+  final double newPrice;
 
   const ProductCard({
     super.key,
+    required this.id,
     required this.imagePath,
     required this.title,
     required this.weight,
@@ -182,11 +184,12 @@ class _ProductCardState extends State<ProductCard> {
               child: TextButton(
                 onPressed: () {
                   final cartItem = CartItem(
-                    title: widget.title,
-                    imagePath: widget.imagePath,
-                    quantity: quantity,
-                    price: widget.newPrice,
-                  );
+                      id: widget.id,
+                      title: widget.title,
+                      imagePath: widget.imagePath,
+                      quantity: quantity,
+                      oldPrice: widget.oldPrice,
+                      newPrice: widget.newPrice);
 
                   Provider.of<CartProvider>(context, listen: false)
                       .addToCart(cartItem);
